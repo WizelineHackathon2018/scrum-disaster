@@ -6,6 +6,8 @@ services:
       context: ./services
       dockerfile: ./api/Dockerfile
     image: scrum-disaster/api
+    links:
+      - score
     labels:
       container_group: service
     environment:
@@ -19,7 +21,6 @@ services:
     image: scrum-disaster/web
     links:
       - api
-      - score
     labels:
       container_group: service
     environment:
