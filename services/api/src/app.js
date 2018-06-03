@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser');
+const reqFast = require('req-fast');
 const express = require('express');
 
 const server = express();
@@ -17,6 +18,9 @@ server.use(bodyParser.urlencoded({ extended: false }));
 
 function handler(cb) {
   return (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
     Promise.resolve()
       .then(() => cb(req))
       .then(data =>{
@@ -36,6 +40,26 @@ function handler(cb) {
 
 server.get('/stories', handler(req => {
   return api.getUserstories(req.query.projectId, req.query.sprintId).then(data => mapStories(data));
+}));
+
+server.post('/score', handler(req => {
+  return new Promise((resolve, reject) => {
+    reqFast({
+      method: 'POST',
+      url: `${process.env.SCORE_HOST}:5000`,
+      data: req.body,
+      headers: {
+        'content-type': 'application/json',
+      },
+    }, (err, resp) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      resolve(resp.body);
+    });
+  });
 }));
 
 server.post('/login', handler(req => {
