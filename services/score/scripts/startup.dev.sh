@@ -2,7 +2,7 @@
 
 set -e
 
-export FLASK_APP=main.py
 export FLASK_DEBUG=1
+export FLASK_DEV=development
 
-flask run -p 5000
+flask run -p 5000 --host=0.0.0.0

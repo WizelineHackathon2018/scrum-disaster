@@ -2,6 +2,4 @@
 
 set -e
 
-export FLASK_APP=main.py
-
-flask run -p 5000
+flask run -p 5000 --host=0.0.0.0
