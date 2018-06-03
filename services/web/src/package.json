@@ -13,11 +13,22 @@
   "tarima": {
     "public": "build",
     "from": "app",
-    "rename": ["**/{assets,pages,public}/**:{fullpath/2}"],
-    "filter": ["!**/components/**"],
-    "bundle": ["**/index.jsx?", "**/assets/**"],
-    "devPlugins": ["tarima-lr"],
-    "ignoreFiles": [".gitignore"],
+    "rename": [
+      "**/{assets,pages,public}/**:{fullpath/2}"
+    ],
+    "filter": [
+      "!**/components/**"
+    ],
+    "bundle": [
+      "**/index.jsx?",
+      "**/assets/**"
+    ],
+    "devPlugins": [
+      "tarima-lr"
+    ],
+    "ignoreFiles": [
+      ".gitignore"
+    ],
     "bundleOptions": {
       "extensions": {
         "css": "less",
@@ -27,7 +38,9 @@
         "objectAssign": "Object.assign"
       },
       "less": {
-        "plugins": ["less-plugin-autoprefix"]
+        "plugins": [
+          "less-plugin-autoprefix"
+        ]
       }
     },
     "rollupFile": "rollup.config.js"
