@@ -24,9 +24,14 @@ function CardItem(props) {
 export default class App extends React.Component {
   constructor() {
     super();
+    this.setSprint = this.setSprint.bind(this);
+    this.setProject = this.setProject.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
+      sprints: [],
+      sprintIds: [],
+      projectId: null,
       isLogin: false,
       result: null,
     };
@@ -67,8 +72,59 @@ export default class App extends React.Component {
       });
   }
 
+  setSprint(event) {
+    const ids = this.state.sprintIds;
+    const sprints = this.state.sprints;
+    const sprintId = parseInt(event.target.value, 10);
+    const offset = ids.indexOf(sprintId);
+
+    if (offset === -1) {
+      if (event.target.checked) {
+        this.setState({
+          sprintIds: ids.concat(sprintId)
+        });
+
+        this._getJSON('stories', { projectId: this.state.projectId, sprintId })
+          .then(res => {
+            this.setState({
+              sprints: res.payload.map(sprintInfo => {
+                return {
+                  id: sprintInfo.id,
+                  name: sprintInfo.title,
+                  userStories: sprintInfo.tasks.map(taskInfo => {
+                    return {
+                      id: taskInfo.id,
+                      real: taskInfo.effortLogged,
+                      estimated: taskInfo.effortEstimate,
+                    };
+                  }),
+                };
+              }),
+            });
+          });
+      }
+    } else {
+      if (!event.target.checked) {
+        ids.splice(offset, 1);
+
+        this.setState({
+          sprintIds: ids,
+          sprints: sprints.filter(sprintInfo => sprintInfo.id === sprintId),
+        });
+      }
+    }
+  }
+
+  setProject(event) {
+    this.setState({
+      projectId: parseInt(event.target.value, 10),
+      sprintIds: [],
+      sprints: [],
+    });
+  }
+
   render() {
-    const { isLogin, loading, result } = this.state;
+    const { projectId, sprintIds, sprints, isLogin, loading, result } = this.state;
 
     if (!isLogin) {
       return <Login
@@ -78,68 +134,15 @@ export default class App extends React.Component {
       />;
     }
 
-    const sprints = [
-      {
-        id: 1,
-        name: 'SP1',
-        userStories: [
-          {
-            id: 100,
-            estimated: 4.5,
-            real: 5.0,
-            complex: 3,
-          },
-          {
-            id: 101,
-            estimated: 8.5,
-            real: 6.0,
-            complex: 5,
-          },
-        ],
-      },
-      {
-        id: 2,
-        name: 'SP2',
-        userStories: [
-          {
-            id: 102,
-            estimated: 4.5,
-            real: 5.0,
-            complex: 3,
-          },
-          {
-            id: 103,
-            estimated: 8.5,
-            real: 6.0,
-            complex: 5,
-          },
-        ],
-      },
-      {
-        id: 3,
-        name: 'SP3',
-        userStories: [
-          {
-            id: 102,
-            estimated: 4.5,
-            real: 5.0,
-            complex: 3,
-          },
-          {
-            id: 103,
-            estimated: 8.5,
-            real: 6.0,
-            complex: 5,
-          },
-        ],
-      },
-    ];
-
+    const selectedProject = result.payload.find(projectInfo => projectInfo.id === this.state.projectId);
+    const projects = result.payload;
     const renderItems = [];
 
     for (let i = 0; i < sprints.length; i+=2) {
       const left = sprints[i];
       const right = sprints[i+1];
+
+      console.log(left, right);
 
       renderItems.push(
         <Card user='User' key={i}>
@@ -149,8 +152,27 @@ export default class App extends React.Component {
     }
 
     return (
-      <div className="home">
-        {renderItems}
+      <div>
+        <div>
+          <select onChange={this.setProject}>
+            <option key={0}></option>
+
+            {projects.map(projectInfo => (
+              <option key={projectInfo.id} value={projectInfo.id}>{projectInfo.title}</option>
+            ))}
+          </select>
+        </div>
+
+        {projectId && selectedProject.sprints.map(sprint => (
+          <div key={sprint.id}>
+            <label>
+              <input type='checkbox' onChange={this.setSprint} value={sprint.id} />
+              {sprint.title}
+            </label>
+          </div>
+        ))}
+
+        <div className='flex'>{renderItems}</div>
       </div>
     );
   }
