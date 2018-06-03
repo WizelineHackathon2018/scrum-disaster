@@ -2,6 +2,7 @@
 
 import ProgressBar from '../ProgressBar';
 import Card from '../Card';
+import Login from '../Login';
 
 export default class App extends React.Component {
   render() {
@@ -19,6 +20,14 @@ export default class App extends React.Component {
         complex: 5,
       },
     ];
+
+    const isLogin = true;
+
+    if(isLogin) {
+        return (
+          <Login  />
+        )
+    }
 
     return (
       <div className='home'>
