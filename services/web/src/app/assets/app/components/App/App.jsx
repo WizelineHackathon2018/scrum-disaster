@@ -121,7 +121,7 @@ export default class App extends React.Component {
       const right = sprints[i+1];
 
       renderItems.push(
-        <Card key={i}>
+        <Card user='User' key={i}>
         {left && <CardItem {...left} />}
         {right && <CardItem {...right} />}
       </Card>);
