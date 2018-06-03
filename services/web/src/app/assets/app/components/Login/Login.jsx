@@ -5,12 +5,12 @@ function Login(props) {
       <div className='bx-form'>
         <div className="wrapper-login">
           <div className="title">
-            <h3>Logisdfsdfn</h3>
+            <span>Inicia Sesión</span>
           </div>
           <div>
-            <form>
-                Email: <input className="input-style" type="text" name="email" /> <br />
-                Contraseña: <input className="input-style" type="password" name="password" />
+            <form className="style-form">
+                <span>Email:</span> <input className="input-style" type="text" name="email" /> <br />
+                <span>Contraseña:</span><input className="input-style" type="password" name="password" />
             </form>
           </div>
         </div>
