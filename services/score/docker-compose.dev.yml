@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  score:
+    environment:
+      FLASK_DEBUG: 1
+      FLASK_DEV: development
+      FLASK_APP: main.py
+    entrypoint: /home/docker/startup.dev.sh

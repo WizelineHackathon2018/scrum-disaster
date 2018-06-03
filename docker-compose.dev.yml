@@ -19,3 +19,10 @@ services:
       - "4000:4000"
     volumes:
       - ./services/web/src:/var/lib/app
+  score:
+    expose:
+      - "5000"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./services/score/src:/var/lib/app
