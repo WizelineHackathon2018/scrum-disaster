@@ -16,6 +16,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.15.2",
+    "moment": "^2.22.2",
     "req-fast": "^0.2.17"
   }
 }

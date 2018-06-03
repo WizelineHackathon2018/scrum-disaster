@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 function mapStories(payload) {
   return payload
     .filter(us => us.status.narrative === 'Completed')
@@ -43,18 +45,18 @@ function mapStories(payload) {
 }
 
 function mapSprints(payload, projectInfo) {
-  return payload.map(sprints => {
-    return {
-      id: projectInfo.id,
-      title: projectInfo.title,
-      sprints: sprints.map(sprint => {
-        return {
-          id: sprint.id,
-          title: sprint.title,
-        };
-      }),
-    };
-  });
+  return {
+    id: projectInfo.id,
+    title: projectInfo.title,
+    sprints: payload.map(sprint => {
+      return {
+        id: sprint.id,
+        title: sprint.title,
+        startDate: moment(sprint.startDate).format('MMM D'),
+        endDate: moment(sprint.endDate).format('MMM D'),
+      };
+    }),
+  }
 }
 
 module.exports = {

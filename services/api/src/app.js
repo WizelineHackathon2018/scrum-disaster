@@ -4,7 +4,11 @@ const express = require('express');
 const server = express();
 
 const Yodiz = require('./yodiz');
-const { mapStories } = require('./util');
+
+const {
+  mapStories,
+  mapSprints,
+} = require('./util');
 
 const api = new Yodiz(process.env.YODIZ_API_KEY);
 
