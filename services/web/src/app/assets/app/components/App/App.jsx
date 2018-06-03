@@ -37,6 +37,9 @@ export default class App extends React.Component {
 
     const options = {
       method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
       body: JSON.stringify(params),
     };
 
@@ -46,16 +49,34 @@ export default class App extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
+    this.setState({
+      isLogin: false,
+      loading: true,
+      result: null,
+    });
+
     const [email, password] = event.target.elements;
 
     return this._getJSON('login', { email: email.value, password: password.value })
       .then(res => {
-        this.setState({ isLogin: res.status === 'ok', result: res });
+        this.setState({
+          isLogin: res.status === 'ok',
+          loading: false,
+          result: res,
+        });
       });
   }
 
   render() {
-    const { isLogin } = this.state;
+    const { isLogin, loading, result } = this.state;
+
+    if (!isLogin) {
+      return <Login
+        loading={loading}
+        onSubmit={this.handleSubmit}
+        message={result && result.message}
+      />;
+    }
 
     const sprints = [
       {
