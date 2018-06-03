@@ -11,6 +11,7 @@ services:
     environment:
       REMOVE_LOG: "${REMOVE_LOG}"
       INTERACTIVE: "${INTERACTIVE}"
+      YODIZ_API_KEY: "${YODIZ_API_KEY}"
   web:
     build:
       context: ./services
