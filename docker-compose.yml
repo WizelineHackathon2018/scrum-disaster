@@ -11,6 +11,7 @@ services:
     labels:
       container_group: service
     environment:
+      SCORE_HOST: "${SCORE_HOST}"
       REMOVE_LOG: "${REMOVE_LOG}"
       INTERACTIVE: "${INTERACTIVE}"
       YODIZ_API_KEY: "${YODIZ_API_KEY}"
