@@ -13,13 +13,16 @@ const {
 
 const api = new Yodiz(process.env.YODIZ_API_KEY);
 
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 server.use(bodyParser.json());
 
 function handler(cb) {
   return (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-
     Promise.resolve()
       .then(() => cb(req))
       .then(data =>{
