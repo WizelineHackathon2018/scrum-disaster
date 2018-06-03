@@ -2,4 +2,4 @@
 
 set -e
 
-echo "START WEB"
+python -m SimpleHTTPServer
