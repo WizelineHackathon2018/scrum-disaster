@@ -4,4 +4,5 @@
 .tarima
 .DS_Store
 build
+__pycache__
 node_modules

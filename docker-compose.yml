@@ -19,8 +19,18 @@ services:
     image: scrum-disaster/web
     links:
       - api
+      - score
     labels:
       container_group: service
     environment:
       REMOVE_LOG: "${REMOVE_LOG}"
+      INTERACTIVE: "${INTERACTIVE}"
+  score:
+    build:
+      context: ./services
+      dockerfile: ./score/Dockerfile
+    image: scrum-disaster/score
+    labels:
+      container_group: service
+    environment:
       INTERACTIVE: "${INTERACTIVE}"
