@@ -1,0 +1,54 @@
+{
+  "name": "scrum-disaster-web",
+  "version": "0.0.0",
+  "private": true,
+  "description": "WEB service",
+  "author": "AgaveLab",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint app",
+    "dev": "tarima watch -ds -p 4000",
+    "build": "tarima -fqe production"
+  },
+  "tarima": {
+    "public": "build",
+    "from": "app",
+    "rename": [
+      "**/{assets,pages,public}/**:{fullpath/2}"
+    ],
+    "bundle": [
+      "**/index.jsx?",
+      "**/assets/**"
+    ],
+    "devPlugins": [
+      "tarima-lr"
+    ],
+    "ignoreFiles": [
+      ".gitignore"
+    ],
+    "bundleOptions": {
+      "extensions": {
+        "css": "less",
+        "js": "es6"
+      },
+      "buble": {
+        "objectAssign": "Object.assign"
+      },
+      "less": {
+        "plugins": [
+          "less-plugin-autoprefix"
+        ]
+      }
+    },
+    "rollupFile": "rollup.config.js"
+  },
+  "devDependencies": {
+    "buble": "^0.19.3",
+    "less": "^3.0.4",
+    "less-plugin-autoprefix": "^1.5.1",
+    "pug": "^2.0.3",
+    "rollup": "^0.59.4",
+    "tarima": "^4.1.0",
+    "tarima-lr": "^0.4.1"
+  }
+}

@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  api:
+    build:
+      context: ./services
+      dockerfile: ./api/Dockerfile
+    image: scrum-disaster/api
+    labels:
+      container_group: service
+    environment:
+      REMOVE_LOG: "${REMOVE_LOG}"
+      INTERACTIVE: "${INTERACTIVE}"
+  web:
+    build:
+      context: ./services
+      dockerfile: ./web/Dockerfile
+    image: scrum-disaster/web
+    links:
+      - api
+    labels:
+      container_group: service
+    environment:
+      REMOVE_LOG: "${REMOVE_LOG}"
+      INTERACTIVE: "${INTERACTIVE}"

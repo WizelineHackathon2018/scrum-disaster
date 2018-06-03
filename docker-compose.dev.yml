@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  api:
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./services/api/src:/var/lib/app
+      - ./services/api/scripts:/home/docker
+      # prevent mounting node_modules to avoid cross-platform incompatibilities
+      - /var/lib/app/node_modules
+    entrypoint: /home/docker/startup.integration.sh
+  web:
+    expose:
+      - "4000"
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./services/web/src:/var/lib/app

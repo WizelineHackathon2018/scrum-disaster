@@ -1,0 +1,7 @@
+*.log
+*.todo
+.env
+.tarima
+.DS_Store
+build
+node_modules

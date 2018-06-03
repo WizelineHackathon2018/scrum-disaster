@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  web:
+    environment:
+      NODE_ENV: development
+      API_HOST: http://localhost:3000/
+    entrypoint: /home/docker/startup.dev.sh

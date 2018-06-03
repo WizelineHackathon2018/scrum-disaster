@@ -1,0 +1,19 @@
+{
+  "name": "scrum-disaster-api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "API service",
+  "author": "AgaveLab",
+  "license": "MIT",
+  "main": "app.js",
+  "engines": {
+    "node": ">=9"
+  },
+  "scripts": {
+    "dev": "nodemon .",
+    "start": "node ."
+  },
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
