@@ -25,6 +25,7 @@ services:
     labels:
       container_group: service
     environment:
+      API_HOST: "${API_HOST}"
       REMOVE_LOG: "${REMOVE_LOG}"
       INTERACTIVE: "${INTERACTIVE}"
   score:
