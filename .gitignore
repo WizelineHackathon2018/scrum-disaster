@@ -1,5 +1,6 @@
 *.log
 *.todo
+*.pyc
 .env
 .tarima
 .DS_Store

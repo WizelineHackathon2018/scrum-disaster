@@ -16,6 +16,5 @@ def give_data():
     percentage = your_points * 100 / all_points
     return jsonify(your_points=your_points, all_points=all_points, percentage=round(percentage))
 
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
