@@ -2,4 +2,4 @@
 
 set -e
 
-python -m SimpleHTTPServer
+cd build && python -m SimpleHTTPServer
