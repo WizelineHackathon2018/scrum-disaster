@@ -16,6 +16,9 @@
     "rename": [
       "**/{assets,pages,public}/**:{fullpath/2}"
     ],
+    "ignore": [
+      "**/components/**"
+    ],
     "bundle": [
       "**/index.jsx?",
       "**/assets/**"
