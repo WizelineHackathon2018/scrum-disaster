@@ -1,5 +1,4 @@
 /* global React */
-/* global API_HOST */
 
 import ProgressBar from '../ProgressBar';
 import Card from '../Card';
@@ -16,18 +15,26 @@ export default class App extends React.Component {
     };
   }
 
-  handleSubmit() {
-    console.log('handleSubmit...');
-    fetch('http://localhost:3000/login', {
+  _getJSON(path, params) {
+    /* global API_HOST */
+
+    const options = {
       method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: 'rodolfo@agavelab.com', password: 'v2c47mk7jd' }),
-    })
-      .then(res => res.json())
-      .then(res => this.setState({ isLogin: true, result: res }));
+      body: JSON.stringify(params),
+    };
+
+    return fetch(`${API_HOST}${path}`, options).then(res => res.json())
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    const [email, password] = event.target.elements;
+
+    return this._getJSON('login', { email: email.value, password: password.value })
+      .then(res => {
+        this.setState({ isLogin: res.status === 'ok', result: res });
+      });
   }
 
   render() {
