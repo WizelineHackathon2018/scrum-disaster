@@ -15,8 +15,10 @@ services:
   web:
     expose:
       - "4000"
+      - "35729"
     ports:
       - "4000:4000"
+      - "35729:35729"
     volumes:
       - ./services/web/src:/var/lib/app
   score:
