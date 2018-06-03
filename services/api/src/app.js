@@ -14,7 +14,6 @@ const {
 const api = new Yodiz(process.env.YODIZ_API_KEY);
 
 server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: false }));
 
 function handler(cb) {
   return (req, res) => {
@@ -38,8 +37,8 @@ function handler(cb) {
   };
 }
 
-server.get('/stories', handler(req => {
-  return api.getUserstories(req.query.projectId, req.query.sprintId).then(data => mapStories(data));
+server.post('/stories', handler(req => {
+  return api.getUserstories(req.body.projectId, req.body.sprintId).then(data => mapStories(data));
 }));
 
 server.post('/score', handler(req => {
