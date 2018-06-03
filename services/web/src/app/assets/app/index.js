@@ -1,5 +1,5 @@
-import Example from './components/Example';
+import { App } from './components';
 
 const node = document.getElementById('app');
 
-ReactDOM.render(React.createElement(Example), node);
+ReactDOM.render(React.createElement(App), node);

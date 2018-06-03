@@ -1,6 +1,6 @@
 /* global React */
 
-export default class Example extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
       <div>FIXME</div>
