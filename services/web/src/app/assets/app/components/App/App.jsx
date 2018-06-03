@@ -1,6 +1,7 @@
 /* global React */
 
 import ProgressBar from '../ProgressBar';
+import Card from '../Card';
 
 export default class App extends React.Component {
   render() {
@@ -20,14 +21,37 @@ export default class App extends React.Component {
     ];
 
     return (
-      <div>
-        {userStories.map(story => {
-          if (story.real > story.estimated) {
-            return <ProgressBar key={story.id} max={story.real * 10} value={story.estimated * 10} over />;
-          } else {
-            return <ProgressBar key={story.id} max={story.estimated * 10} value={story.real * 10} />;
-          }
-        })}
+      <div className='home'>
+        <Card>
+          <div>
+            {userStories.map(story => {
+              if (story.real > story.estimated) {
+                return <ProgressBar
+                          key={story.id}
+                          max={story.real * 10}
+                          value={story.estimated * 10}
+                          over />;
+              } else {
+                return <ProgressBar
+                          key={story.id}
+                          max={story.estimated * 10}
+                          value={story.real * 10} />;
+              }
+            })}
+          </div>
+        </Card>
+        <Card>
+          <div>
+            {userStories.map(story => {
+              if (story.real > story.estimated) {
+                return <ProgressBar key={story.id} max={story.real * 10} value={story.estimated * 10} over />;
+              } else {
+                return <ProgressBar key={story.id} max={story.real * 10} value={story.estimated * 10} />;
+              }
+            }
+          )}
+          </div>
+        </Card>
       </div>
     );
   }
