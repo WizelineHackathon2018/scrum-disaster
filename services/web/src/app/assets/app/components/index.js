@@ -1,4 +1,5 @@
 import App from './App';
 import ProgressBar from './ProgressBar';
+import Card from './Card';
 
-export { App, ProgressBar };
+export { App, ProgressBar, Card };
