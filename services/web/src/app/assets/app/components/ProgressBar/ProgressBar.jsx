@@ -16,8 +16,8 @@ export default class ProgressBar extends React.Component {
 
     return (
       <div className="wrapper">
-        <div className="bar" style={{ height: `${max}px`, ...colorBar }} />
-        <div className="progress" style={{ height: `${value}px`, ...colorProgress }} />
+        <div className="bar" style={{ height: `${max * 10}px`, ...colorBar }} />
+        <div className="progress" style={{ height: `${value * 10}px`, ...colorProgress }} />
       </div>
     );
   }

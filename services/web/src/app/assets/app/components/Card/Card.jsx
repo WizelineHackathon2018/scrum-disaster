@@ -1,13 +1,12 @@
 function Card(props) {
-  const {
-  children,
-} = props;
+  const { children, user } = props;
 
   return (
-    <div className='card'>
-      <h3 className='title-month'>Mayo</h3>
-        {children}
-    </div>);
+    <div className="card">
+      <h3 className="title-month">{user}</h3>
+      {children}
+    </div>
+  );
 }
 
 export default Card;
